@@ -18,28 +18,7 @@
 #include <utility>
 using namespace std;
 
-template <size_t Index, typename... Args>
-class MyTupleHash
-{
-public:
-    size_t operator()(const std::tuple<Args...> &t) const
-    {
-        const size_t prime = 31;
-        size_t seed = MyTupleHash<Index - 1, Args...>{}(t);
-        seed ^= std::hash<typename std::tuple_element<Index, std::tuple<Args...>>::type>{}(std::get<Index>(t) + prime);
-        return seed;
-    }
-};
 
-template <typename... Args>
-class MyTupleHash<0, Args...>
-{
-public:
-    size_t operator()(const std::tuple<Args...> &t) const
-    {
-        return std::hash<typename std::tuple_element<0, std::tuple<Args...>>::type>{}(std::get<0>(t));
-    }
-};
 
 class Solution
 {
