@@ -2,13 +2,14 @@
  * @Author: heyuwei he2001015@163.com
  * @Date: 2024-02-26 13:59:22
  * @LastEditors: heyuwei he2001015@163.com
- * @LastEditTime: 2024-03-05 15:43:17
+ * @LastEditTime: 2024-03-10 22:29:30
  * @FilePath: /leetcode/util/leetcode.hpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 #include "basic.hpp"
 #include "solution.hpp"
 #include "units.hpp"
+#include <tuple>
 
 template <typename... args, size_t... is>
 auto __helper(Solution &s, tuple<args...> &t, index_sequence<is...>)
@@ -26,6 +27,17 @@ auto call_sol(Solution *s, tuple<args...> &t)
 {
     return __helper(*s, t, index_sequence_for<args...>{});
 }
+
+// 判断类型是否是元组类型的模板
+template <typename T>
+struct is_tuple : std::false_type
+{
+};
+
+template <typename... Args>
+struct is_tuple<std::tuple<Args...>> : std::true_type
+{
+};
 
 int main(int argc, char const *argv[])
 {
@@ -50,9 +62,16 @@ int main(int argc, char const *argv[])
             cout << in << endl;
             cout << "gt:\t";
             cout << out << endl;
-            OutputType ourout = std::make_tuple(res);
-            cout << "pre:\t";
-            cout << ourout << endl;
+            if constexpr (is_tuple<decltype(res)>::value)
+            {
+                cout << "pre:\t";
+                cout << res << endl;
+            }
+            else
+            {
+                cout << "pre:\t";
+                cout << std::make_tuple(res) << endl;
+            }
         }
     }
     float passed_percent = passed_test_num * 1.0f / total_test_num;

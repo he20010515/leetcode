@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(leetcode_local)
 set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined -fno-sanitize-recover=all")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined -fsanitize=address -fno-sanitize-recover=all")
 enable_testing()
 # 遍历问题列表生成可执行文件
 file(GLOB problem_dirs "questions/*")
