@@ -2,7 +2,7 @@
  * @Author: heyuwei he2001015@163.com
  * @Date: 2024-03-02 13:39:09
  * @LastEditors: heyuwei he2001015@163.com
- * @LastEditTime: 2024-03-09 14:34:44
+ * @LastEditTime: 2024-03-13 21:49:25
  * @FilePath: /leetcode/util/basic.hpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -20,6 +20,11 @@
 template <typename T>
 std::ostream &operator<<(std::ostream &out, const std::vector<T> &vec)
 {
+    if (vec.size() == 0)
+    {
+        out << "[]";
+        return out;
+    }
     const auto flag = &(*(--vec.end()));
     out << "[";
     for (auto &&elem : vec)
