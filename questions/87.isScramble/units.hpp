@@ -2,7 +2,7 @@
  * @Author: heyuwei he2001015@163.com
  * @Date: 2024-02-26 14:02:54
  * @LastEditors: heyuwei he20010515@163.com
- * @LastEditTime: 2024-03-25 14:51:24
+ * @LastEditTime: 2024-03-25 15:28:02
  * @FilePath: /leetcode/quentions/1.twosum/tests.cpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置
  * 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
@@ -12,16 +12,18 @@
 #include <vector>
 
 using namespace std;
-using InputType = tuple<vector<int>>;
-using OutputType = tuple<int>;
+using InputType = tuple<string, string>;
+using OutputType = tuple<bool>;
 
 vector<InputType> TEST_UNIT_INPUT = {
-    {{2, 1, 5, 6, 2, 3}},
-    {{2, 4}},
+    {"great", "rgeat"},
+    {"abcde", "caebd"},
+    {"a", "a"},
 };
 vector<OutputType> TEST_UNIT_OUTPUT = {
-    {10},
-    {4},
+    {true},
+    {true},
+    {false},
 };
 
 inline bool compare(OutputType ground_truth, OutputType res)
