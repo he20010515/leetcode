@@ -2,7 +2,7 @@
  * @Author: heyuwei he20010515@163.com
  * @Date: 2024-03-26 17:48:35
  * @LastEditors: heyuwei he20010515@163.com
- * @LastEditTime: 2024-03-27 09:32:41
+ * @LastEditTime: 2024-03-27 20:17:16
  * @FilePath: /leetcode/util/BinaryTree.hpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -93,6 +93,7 @@ inline void _printer(std::ostream &out, const TreeNode *root)
     const int width = (2 << deepth) - 3;
     const int height = (2 << (deepth - 1)) - 1;
     Block_t *buffer = (Block_t *)malloc(sizeof(Block_t) * width * height);
+    out << std::endl;
     memset(buffer, 0, (width * height) * sizeof(Block_t));
     fillbuffer(root, buffer, 0, (width - 1) / 2, width, height);
     for (i = 0; i < height; i++)
