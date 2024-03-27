@@ -1,8 +1,8 @@
 /*
  * @Author: heyuwei he2001015@163.com
  * @Date: 2024-03-02 13:39:09
- * @LastEditors: heyuwei he2001015@163.com
- * @LastEditTime: 2024-03-13 21:49:25
+ * @LastEditors: heyuwei he20010515@163.com
+ * @LastEditTime: 2024-03-27 09:26:13
  * @FilePath: /leetcode/util/basic.hpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -56,8 +56,8 @@ print_tuple(std::ostream &out, const std::tuple<Args...> &tuple)
     // do nothing;
 }
 template <size_t Index = 0, typename... Args>
-    typename std::enable_if < Index<sizeof...(Args), void>::type
-                              print_tuple(std::ostream &out, const std::tuple<Args...> &tuple)
+typename std::enable_if<(Index < sizeof...(Args)), void>::type
+print_tuple(std::ostream &out, const std::tuple<Args...> &tuple)
 {
     if (Index != 0)
         out << ", ";

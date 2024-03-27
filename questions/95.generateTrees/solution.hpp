@@ -2,16 +2,13 @@
  * @Author: heyuwei he2001015@163.com
  * @Date: 2024-02-27 21:26:47
  * @LastEditors: heyuwei he20010515@163.com
- * @LastEditTime: 2024-03-26 23:15:25
+ * @LastEditTime: 2024-03-27 09:27:58
  * @FilePath: /leetcode/questions/twosum/solution.hpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置
  * 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 #include "BinaryTree.hpp"
-#include "basic.hpp"
-#include <algorithm>
-#include <ranges>
-#include <unordered_set>
+#include <map>
 #include <vector>
 
 // 二叉查找树（英语：Binary Search Tree），也称为二叉搜索树、有序二叉树（ordered binary tree）或排序二叉树（sorted binary tree），是指一棵空树或者具有下列性质的二叉树：
@@ -23,37 +20,32 @@ using namespace std;
 class Solution
 {
 public:
+    static map<pair<int, int>, vector<TreeNode *>> memo;
     vector<TreeNode *> sol(int n)
     {
-        vector<bool> usedvalue(n + 1, false);
-        vector<int> numbers(n);
-        for (int i = 1; i <= n; i++)
-            numbers[i - 1] = i;
-
-        return {};
+        if (memo.contains({1, n}))
+            return memo[{1, n}];
+        backtrack(1, n);
+        return memo[{1, n}];
     };
-    void build(TreeNode *node, vector<bool> &usedvalue, vector<int> &numbers)
+    vector<TreeNode *> backtrack(int l, int r)
     {
-        if (usedvalue.size() == numbers.size())
-            return;
-        for (auto number : numbers)
+        if (l > r)
+            return {nullptr};
+        if (memo.contains({l, r}))
+            return memo[{l, r}];
+
+        vector<TreeNode *> res;
+        for (int i = l; i <= r; i++)
         {
-            if (usedvalue[number])
-                continue;
-            if (number < node->val)
-            {
-                node->left = new TreeNode(number);
-                usedvalue[number] = true;
-                build(node->left, usedvalue, numbers);
-                usedvalue[number] = false;
-            }
-            else
-            {
-                node->right = new TreeNode(number);
-                usedvalue[number] = true;
-                build(node->right, usedvalue, numbers);
-                usedvalue[number] = false;
-            }
-        }
+            vector<TreeNode *> leftTrees = backtrack(l, i - 1);
+            vector<TreeNode *> rightTrees = backtrack(i + 1, r);
+            for (auto &p : leftTrees)
+                for (auto &q : rightTrees)
+                    res.push_back(new TreeNode(i, p, q));
+        };
+        return memo[{l, r}] = res;
     }
 };
+
+map<pair<int, int>, vector<TreeNode *>> Solution::memo = {};

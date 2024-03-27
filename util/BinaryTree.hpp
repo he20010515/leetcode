@@ -2,7 +2,7 @@
  * @Author: heyuwei he20010515@163.com
  * @Date: 2024-03-26 17:48:35
  * @LastEditors: heyuwei he20010515@163.com
- * @LastEditTime: 2024-03-26 22:30:59
+ * @LastEditTime: 2024-03-27 09:32:41
  * @FilePath: /leetcode/util/BinaryTree.hpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -26,10 +26,22 @@ struct TreeNode
         : val(x), left(nullptr), right(nullptr){};
     TreeNode(int x, TreeNode *left, TreeNode *right)
         : val(x), left(left), right(right){};
+    bool operator==(TreeNode &other);
 };
 
 namespace BT
 {
+
+inline bool isequal(const TreeNode *nodea, const TreeNode *nodeb)
+{
+    if (nodea == nullptr and nodeb == nullptr)
+        return true;
+    if (nodea != nullptr and nodeb != nullptr)
+        if (nodea->val == nodeb->val)
+            return isequal(nodea->left, nodeb->left) and isequal(nodea->right, nodeb->right);
+
+    return false;
+};
 
 inline size_t deeptree(const TreeNode *t)
 {
@@ -102,9 +114,35 @@ inline void _printer(std::ostream &out, const TreeNode *root)
 }
 } // namespace BT
 
+bool TreeNode::operator==(TreeNode &other)
+{
+    return BT::isequal(this, &other);
+};
 inline std::ostream &operator<<(std::ostream &out, TreeNode *root)
 {
     BT::_printer(out, root);
+    return out;
+}
+
+std::ostream &operator<<(std::ostream &out, const std::vector<TreeNode *> &vec)
+{
+    if (vec.size() == 0)
+    {
+        out << "[]";
+        return out;
+    }
+    const auto flag = &(*(--vec.end()));
+    out << "[";
+    for (auto &&elem : vec)
+    {
+        if (&elem == flag)
+            out << "\n"
+                << elem;
+        else
+            out << "\n"
+                << elem << ", ";
+    }
+    out << "]";
     return out;
 }
 #define Placeholder std::numeric_limits<int>::min()
