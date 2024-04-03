@@ -14,4 +14,5 @@ foreach(problem_dir ${problem_dirs})
     set_target_properties(${problem_name} PROPERTIES LINKER_LANGUAGE CXX)
 endforeach(problem_dir ${problem_dirs})
 
+add_subdirectory("acm")
 
