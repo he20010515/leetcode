@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(lldb) Launch-leetcode",
+            "type": "lldb",
+            "request": "launch",
+            // Resolved by CMake Tools:
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+        },
+        {
+            "name": "(lldb) Launch-acm",
+            "type": "lldb",
+            "request": "launch",
+            // Resolved by CMake Tools:
+            // "preLaunchTask": "获取当前CMake目标名",
+            "program": "${command:cmake.launchTargetPath}",
+            // "args": [
+            //     "<",
+            //     "${workspaceFolder}/acm/questions/${}/stdin.txt"
+            // ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+        },
+    ]
+}

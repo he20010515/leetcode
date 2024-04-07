@@ -1,4 +1,4 @@
 .cache
-.vscode
+vscode
 build
 .DS_Store
