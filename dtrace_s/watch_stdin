@@ -1,8 +1,0 @@
-#!/usr/sbin/dtrace -s
-
-pid$target::read:entry,
-pid$target::write:entry
-/$target == $1/
-{
-    printf("%s %s\n", probefunc, copyinstr(arg0));
-}

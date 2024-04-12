@@ -2,7 +2,7 @@
  * @Author: heyuwei he2001015@163.com
  * @Date: 2024-03-02 13:39:09
  * @LastEditors: heyuwei he20010515@163.com
- * @LastEditTime: 2024-03-27 09:26:13
+ * @LastEditTime: 2024-04-09 01:36:01
  * @FilePath: /leetcode/util/basic.hpp
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -12,7 +12,6 @@
 #include <iostream>
 #include <ostream>
 #include <ranges>
-#include <string>
 #include <tuple>
 #include <type_traits>
 #include <vector>
